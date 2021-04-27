@@ -1,0 +1,46 @@
+<h2 class="ui center aligned medium icon header">
+  <i class="circular orange coffee icon"></i>
+  Say something . . .
+</h2>
+<div class="ui grid">
+  <div class="twelve wide column">
+    <div class="ui fluid raised card chatbox">
+      <div class="content" id="messages">
+        <div class="ui feed">
+          <% @msg_list.each do |msg| %>
+            <div class="event">
+              <div class="content">
+                <div class="summary">
+                   <em><%= msg.user.username %></em> : <%= msg.body %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="extra content">
+        <%= form_for(@message, url: message_path, class: 'ui reply form', local: true) do |f| %>
+          <div class="field">
+            <div class="ui fluid icon input">
+              <%= f.text_field :body, placeholder: "Add comment here . . ." %>
+              <%= f.button '<i class="bordered inverted orange edit icon"></i>'.html_safe %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="four wide column">
+    <div class="ui card chatbox">
+      <div class="content">
+        <div class="ui inverted vertical menu">
+          <% @user.each do |u| %>
+            <a class="item">
+              <%= u.username %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
